@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Авторизация</title>
+		<link rel="stylesheet" href="./index.css">
+	</head>
+	<body>
+		<div class="page">
+			<div class="form-container">
+				<form id="login-form" method="get" novalidate class="form">
+					<div class="form-row">
+						<label for="email">email: </label>
+						<input id="email" class="text-input" type="email" name="email" pattern="^\S+@\S+\.\S+$" placeholder="Введите email" required />
+						<div id="email-error" class="error-message"> Некорректный email. </div>
+					</div>
+					<div class="form-row">
+						<label for="password">пароль: </label>
+						<input id="password" class="text-input" type="password" placeholder="Введите пароль" autocomplete="current-password" minlength="6" pattern="[0-9a-zA-Z]{6,20}" required />
+						<div id="password-error" class="error-message"> Некорректный пароль. (Пожалуйста, введите пароль длиной от 6 до 20, состоящий из символов латинского алфавита и/или цифр) </div>
+					</div>
+					<div>
+						<input type="submit" value="Login" class="login-button" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var form = document.getElementById('login-form');
+			var emailErrorMessage = document.getElementById('email-error');
+			var passwordErrorMessage = document.getElementById('password-error');
+
+			form.addEventListener('submit', function(event) {
+				emailErrorMessage.style.display = 'none';
+				passwordErrorMessage.style.display = 'none';
+				var isEmailValid = event.target.email.validity.valid;
+				var isPasswordValid = event.target.password.validity.valid;
+
+				if (isEmailValid !== true) {
+					event.preventDefault();
+					emailErrorMessage.style.display = 'block';
+				}
+
+				if (isPasswordValid !== true) {
+					event.preventDefault();
+					passwordErrorMessage.style.display = 'block';
+				}
+			});
+		</script>
+	</body>
+</html>
